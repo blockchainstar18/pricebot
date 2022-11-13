@@ -1,0 +1,102 @@
+.Icon {
+  display: flex;
+  color: white;
+  background: rgb(75, 75, 75);
+}
+
+.row {
+  height: 2px;
+  background: black;
+}
+
+.pricecheck {
+  height: 25px;
+  background: rgb(75, 75, 75);
+  cursor: pointer;
+  color: white;
+  font-family: cursive;
+  font-size: 15px;
+  text-align: center;
+}
+
+.pricecheck:hover {
+  background: black;
+}
+
+.inputtitle {
+  display: flex;
+  height: 70px;
+  /* background: rgb(75, 75, 75); */
+}
+
+input {
+  margin: auto;
+  height: 25px;
+  padding-left: 5px;
+  outline: none;
+
+}
+
+button {
+  margin: auto;
+  height: 30px;
+  width: 70px;
+  background: rgb(75, 75, 75);
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+button:hover {
+  background: black;
+}
+
+.info {
+  display: block;
+  margin-left: 3px;
+}
+
+.product {
+  display: flex;
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.product:hover {
+  background: rgb(192, 251, 167);
+}
+
+.txt {
+  font-size: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.txtprice {
+  font-size: 15px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.cdkey {
+  width: 50%;
+  /* background: wheat; */
+}
+
+.g2a {
+  width: 50%;
+  /* background: rgb(157, 139, 104); */
+}
+
+
+.products {
+  padding: 5px;
+  height: 300px;
+  display: flex;
+  overflow-y: scroll;
+}
+
+.subtitle {
+  font-family: cursive;
+  font-size: 17px;
+}
