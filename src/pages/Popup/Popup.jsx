@@ -42,7 +42,8 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res)
           setG2A(res.data.items)
-
+          alert(parseFloat(res.data.items[0].price))
+          alert(marge)
           setMaxprice(parseFloat(res.data.items[0].price) * (100.0) / (100.0 + marge))
 
         })
@@ -99,7 +100,7 @@ const Popup = () => {
               <div className='subtitle'>CDKEY</div>
               {
                 cdkeys.map((item) => {
-                  return (<div className='product' key={item.objectID} style={item.price.USD.default < maxprice ? ({ "background": "blue" }) : ({})}>
+                  return (<div className='product' key={item.objectID} style={item.price.USD.default < maxprice ? ({ "background": "yellow" }) : ({})}>
                     <img src={item.image_url} width={50} height={70}></img>
                     <div className='info'>
                       <div className='txtprice'>{item.price.USD.default}</div>
