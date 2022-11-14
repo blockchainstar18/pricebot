@@ -42,8 +42,6 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res)
           setG2A(res.data.items)
-          alert(parseFloat(res.data.items[0].price))
-          alert(marge)
           setMaxprice((parseFloat(res.data.items[0].price) * (100.0 - marge)) / (100.0))
         })
       })
@@ -92,7 +90,7 @@ const Popup = () => {
       }
       {
         cdkeys.length > 0 ? (<div>
-          <div>{maxprice}</div><div className='products'>
+          <div className='subtitle'>Max price :{maxprice}</div><div className='products'>
 
 
             <div className='cdkey'>
