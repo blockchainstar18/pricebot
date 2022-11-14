@@ -58,6 +58,7 @@ button:hover {
 .info {
   display: block;
   margin-left: 3px;
+  height: 70px;
   overflow: hidden;
 }
 
