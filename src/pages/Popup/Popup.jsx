@@ -42,10 +42,11 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res)
           setG2A(res.data.items)
+          setMinprice(parseFloat(res.data.items[0].price) * (100 + marge) / 100)
+
         })
       })
 
-    setMinprice(parseFloat(g2a[0].price) * (100 + marge) / 100)
     fetch('https://muvyib7tey-1.algolianet.com/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.35.1)%3B%20Browser%3B%20instantsearch.js%20(4.15.0)%3B%20Magento2%20integration%20(3.2.0)%3B%20JS%20Helper%20(3.4.4)&x-algolia-application-id=MUVYIB7TEY&x-algolia-api-key=ODNjY2VjZjExZGE2NTg3ZDkyMGQ4MjljYzYwM2U0NmRjYWI4MDgwNTQ0NjgzNmE2ZGQyY2ZmMDlkMzAyYTI4NXRhZ0ZpbHRlcnM9',
       {
         method: 'POST',
