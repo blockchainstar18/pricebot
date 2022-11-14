@@ -14,6 +14,9 @@ const Popup = () => {
   const [title, setTitle] = useState()
   const [cdkeys, setCDKEYS] = useState([])
   const [g2a, setG2A] = useState([])
+  const [marge, setMarge] = useState(15)
+  const [minprice, setMinprice] = useState(1)
+
   function start() {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       chrome.tabs.sendMessage(tabs[0].id, { message: 'start' });
@@ -33,6 +36,16 @@ const Popup = () => {
 
   function checkPrice() {
     const encodedtitle = encodeURI(title)
+
+    fetch(`https://www.g2a.com/search/api/v3/suggestions?include[]=categories&itemsPerPage=4&phrase=${encodedtitle}&currency=USD`)
+      .then((res) => {
+        res.json().then((res) => {
+          console.log(res)
+          setG2A(res.data.items)
+        })
+      })
+
+    setMinprice(parseFloat(g2a[0].price) * (100 + marge) / 100)
     fetch('https://muvyib7tey-1.algolianet.com/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(3.35.1)%3B%20Browser%3B%20instantsearch.js%20(4.15.0)%3B%20Magento2%20integration%20(3.2.0)%3B%20JS%20Helper%20(3.4.4)&x-algolia-application-id=MUVYIB7TEY&x-algolia-api-key=ODNjY2VjZjExZGE2NTg3ZDkyMGQ4MjljYzYwM2U0NmRjYWI4MDgwNTQ0NjgzNmE2ZGQyY2ZmMDlkMzAyYTI4NXRhZ0ZpbHRlcnM9',
       {
         method: 'POST',
@@ -41,13 +54,6 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res.results[0].hits)
           setCDKEYS(res.results[0].hits)
-        })
-      })
-    fetch(`https://www.g2a.com/search/api/v3/suggestions?include[]=categories&itemsPerPage=4&phrase=${encodedtitle}&currency=USD`)
-      .then((res) => {
-        res.json().then((res) => {
-          console.log(res)
-          setG2A(res.data.items)
         })
       })
   }
@@ -69,21 +75,30 @@ const Popup = () => {
       }}>Set product to check</div>
       <div className='row'></div>
       {
-        visible ? (<div className='inputtitle'>
-          <input onChange={(e) => setTitle(e.target.value)} placeholder='Title of product'></input>
-          <button onClick={() => checkPrice()}>Ok</button>
-        </div>) : (<div></div>)
+        visible ? (<div>
+          <div className='inputtitle'>
+            <input onChange={(e) => setTitle(e.target.value)} placeholder='Title of product'></input>
+            <button onClick={() => checkPrice()}>Ok</button>
+          </div>
+          <div className='inputtitle'>
+            <div className='marge' >MARGE(%)</div>
+            <input type="number" min="1" max="100" value={marge} onChange={(e) => setMarge(e.target.value)} />
+            {/* <button onClick={() => alert(marge)}>Ok</button> */}
+          </div>
+        </div>
+        ) : (<div></div>)
       }
+      <div>{minprice}</div>
       {
         cdkeys.length > 0 ? (<div className='products'>
           <div className='cdkey'>
             <div className='subtitle'>CDKEY</div>
             {
               cdkeys.map((item) => {
-                return (<div className='product'>
+                return (<div className='product' key={item.objectID} style={item.price.USD.default > minprice ? ({ "background": "blue" }) : ({})}>
                   <img src={item.image_url} width={50} height={70}></img>
                   <div className='info'>
-                    <div className='txtprice'>{item.price.USD.default_formated}</div>
+                    <div className='txtprice'>{item.price.USD.default}</div>
                     <div className='txt'>{item.name}</div>
                   </div>
                 </div>)
@@ -95,7 +110,7 @@ const Popup = () => {
             <div className='subtitle'>G2A</div>
             {
               g2a.map((item) => {
-                return (<div className='product'>
+                return (<div className='product' key={item.id}>
                   <img src={item.image.sources[0].url} width={50} height={70}></img>
                   <div className='info'>
                     <div className='txtprice'>{item.price}</div>
