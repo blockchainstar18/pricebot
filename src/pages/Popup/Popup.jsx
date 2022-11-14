@@ -15,7 +15,7 @@ const Popup = () => {
   const [cdkeys, setCDKEYS] = useState([])
   const [g2a, setG2A] = useState([])
   const [marge, setMarge] = useState(15)
-  const [minprice, setMinprice] = useState(1)
+  const [maxprice, setMaxprice] = useState(1)
 
   function start() {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -43,7 +43,7 @@ const Popup = () => {
           console.log(res)
           setG2A(res.data.items)
 
-          setMinprice(parseFloat(res.data.items[0].price))
+          setMaxprice(parseFloat(res.data.items[0].price) * (100.0) / (100.0 + marge))
 
         })
       })
@@ -90,14 +90,14 @@ const Popup = () => {
         </div>
         ) : (<div></div>)
       }
-      <div>{minprice}</div>
+      <div>{maxprice}</div>
       {
         cdkeys.length > 0 ? (<div className='products'>
           <div className='cdkey'>
             <div className='subtitle'>CDKEY</div>
             {
               cdkeys.map((item) => {
-                return (<div className='product' key={item.objectID} style={item.price.USD.default > minprice ? ({ "background": "blue" }) : ({})}>
+                return (<div className='product' key={item.objectID} style={item.price.USD.default < maxprice ? ({ "background": "blue" }) : ({})}>
                   <img src={item.image_url} width={50} height={70}></img>
                   <div className='info'>
                     <div className='txtprice'>{item.price.USD.default}</div>
