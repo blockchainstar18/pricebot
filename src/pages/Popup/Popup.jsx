@@ -44,8 +44,7 @@ const Popup = () => {
           setG2A(res.data.items)
           alert(parseFloat(res.data.items[0].price))
           alert(marge)
-          setMaxprice((parseFloat(res.data.items[0].price) * (100.0)) / (100.0 + marge))
-
+          setMaxprice((parseFloat(res.data.items[0].price) * (100.0 - marge)) / (100.0))
         })
       })
 
