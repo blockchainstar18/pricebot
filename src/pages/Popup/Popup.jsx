@@ -90,9 +90,10 @@ const Popup = () => {
         </div>
         ) : (<div></div>)
       }
-      <div>{maxprice}</div>
       {
         cdkeys.length > 0 ? (<div className='products'>
+          <div>{maxprice}</div>
+
           <div className='cdkey'>
             <div className='subtitle'>CDKEY</div>
             {
