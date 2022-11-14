@@ -42,7 +42,8 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res)
           setG2A(res.data.items)
-          setMinprice(parseFloat(res.data.items[0].price) * (100 + marge) / 100)
+
+          setMinprice(parseFloat(res.data.items[0].price))
 
         })
       })
