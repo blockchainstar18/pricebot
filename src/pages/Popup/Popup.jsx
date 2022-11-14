@@ -42,7 +42,7 @@ const Popup = () => {
         res.json().then((res) => {
           console.log(res)
           setG2A(res.data.items)
-          setMaxprice((parseFloat(res.data.items[0].price) * (100.0 - marge)) / (100.0))
+          setMaxprice(((parseFloat(res.data.items[0].price) * (100.0 - marge)) / (100.0)).toFixed(2))
         })
       })
 
