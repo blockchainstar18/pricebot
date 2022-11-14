@@ -91,40 +91,41 @@ const Popup = () => {
         ) : (<div></div>)
       }
       {
-        cdkeys.length > 0 ? (<div className='products'>
-          {maxprice}
+        cdkeys.length > 0 ? (<div>
+          <div>{maxprice}</div><div className='products'>
 
-          <div className='cdkey'>
-            <div className='subtitle'>CDKEY</div>
-            {
-              cdkeys.map((item) => {
-                return (<div className='product' key={item.objectID} style={item.price.USD.default < maxprice ? ({ "background": "blue" }) : ({})}>
-                  <img src={item.image_url} width={50} height={70}></img>
-                  <div className='info'>
-                    <div className='txtprice'>{item.price.USD.default}</div>
-                    <div className='txt'>{item.name}</div>
-                  </div>
-                </div>)
 
-              })
-            }
-          </div>
-          <div className='g2a'>
-            <div className='subtitle'>G2A</div>
-            {
-              g2a.map((item) => {
-                return (<div className='product' key={item.id}>
-                  <img src={item.image.sources[0].url} width={50} height={70}></img>
-                  <div className='info'>
-                    <div className='txtprice'>{item.price}</div>
-                    <div className='txt'>{item.name}</div>
-                  </div>
-                </div>)
+            <div className='cdkey'>
+              <div className='subtitle'>CDKEY</div>
+              {
+                cdkeys.map((item) => {
+                  return (<div className='product' key={item.objectID} style={item.price.USD.default < maxprice ? ({ "background": "blue" }) : ({})}>
+                    <img src={item.image_url} width={50} height={70}></img>
+                    <div className='info'>
+                      <div className='txtprice'>{item.price.USD.default}</div>
+                      <div className='txt'>{item.name}</div>
+                    </div>
+                  </div>)
 
-              })
-            }
-          </div>
-        </div>) : (<div></div>)
+                })
+              }
+            </div>
+            <div className='g2a'>
+              <div className='subtitle'>G2A</div>
+              {
+                g2a.map((item) => {
+                  return (<div className='product' key={item.id}>
+                    <img src={item.image.sources[0].url} width={50} height={70}></img>
+                    <div className='info'>
+                      <div className='txtprice'>{item.price}</div>
+                      <div className='txt'>{item.name}</div>
+                    </div>
+                  </div>)
+
+                })
+              }
+            </div>
+          </div></div>) : (<div></div>)
       }
 
 
